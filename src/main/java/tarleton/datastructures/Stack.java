@@ -16,8 +16,8 @@ package tarleton.datastructures;
  * @author Joe Meier
  */
 public class Stack {
-    private final int[] curStack;
-    private final int size;
+    private int[] curStack;
+    private int size;
     private int top;
 
     public Stack(int size) {
@@ -28,7 +28,12 @@ public class Stack {
     
     public void push(int item){
         if (this.size == (this.top + 1)){
-            throw new StackException("Full Stack.");
+            int[] tempStack = curStack;
+            this.size *= 2;
+            this.curStack = new int[size];
+            for(int i = 0; i <= top; i++){
+                this.curStack[i] = tempStack[i];
+            }
         }
         this.top++;
         this.curStack[this.top] = item;
